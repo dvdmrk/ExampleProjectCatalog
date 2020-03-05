@@ -30,7 +30,7 @@ Cloud software for storing example projects. Store your project name, github rep
 
 ## Milestones
 
-- [ ] Create a GitHub Repo and Start on a Project Plan
+- [x] Create a GitHub Repo and Start on a Project Plan
 - [ ] Scaffold a new .NET Core MVC Application
 - [ ] Model Relational [Example Project] Data
 - [ ] Generating a Code First Database
