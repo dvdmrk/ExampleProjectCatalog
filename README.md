@@ -36,4 +36,3 @@ Cloud software for storing example projects. Store your project name, github rep
 - [ ] Generating a Code First Database
 - [ ] Creating CRUD Controllers
 - [ ] Creating CRUD Views
-- [ ] Contact the media
