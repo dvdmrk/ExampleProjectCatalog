@@ -5,11 +5,12 @@ Cloud software for storing example projects. Store your project name, github rep
 
 ## Technical Summary
 
--  C#
--  ASP.NET Core MVC
--  EF Core
--  IIS
--  Bootstrap/ JQuery
+-  **Backend:** C# 
+-  **Framework:** ASP.NET Core MVC
+-  **ORM:** EF Core
+-  **Server:** IIS
+-  **DB:** SQL
+-  **Front End:** Bootstrap/ JQuery
 
 ## Getting Started
 
