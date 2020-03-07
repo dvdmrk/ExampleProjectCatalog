@@ -1,86 +1,107 @@
-# Week 1
+# Week 2
 
 ## Requirements:
-Think of an idea and create a project plan.
+
+Commit a new Solution and MVC Project to GitHub.
 
 ## Expectation:
 
-At the end of this class you will have a GitHub repo for your project. You should come to class with an idea and spend class coding your plan as part of the README.md file. Consult the [GitHub Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for questions regarding how to use Markdown. 
-
-Your Project Plan should consist of the following fields:
-
-- **Overview -** A brief overview of what your program does
-- **Technical Summary -** A brief technical summary of what technologies your project implements
-- **Getting Started -** A brief instructional on how to build and run your application
-- **Features -** A brief overview of the high level features your application implements
-- **Milestones -** A list of tasks you will need to accomplish to complete this project
-
-Consult the following examples for previous successful project plans:
-
-- [Example Project Catalog](https://github.com/dvdmrk/ExampleProjectCatalog)
-- [Real Estate Project](https://github.com/jsaucedo294/cl_realEstateProject)
-
----
+At the end of this instructional you will have a templated MVC Application that you can build.
 
 ## Getting Started
 
-1. **Come up with an idea**
+1. **Create a new branch**
 
-Before you can come up with an idea it helps to have an idea of what we'll be building. The requirements want us to build an MVC CRUD application. MVC is a design pattern that will be covered in [Week 2](). CRUD stands for: Create, Read, Update, and Delete. **Basically-** we're going to build a website that controls a multidimensional excel sheet. To put that in different words: we are building the user interface to access and augument data.
-
-**Simply Put:** You're going to build a front-end, backend, and database.
-
-What are some good ideas for this?
-
-- Movie catalog
-- Quote catalog
-- Attendance sheet
-- To-do list
-- Workout tracker
-
-You are going to build the user interace, logic, and database- so your idea should involve data you care about, logic you understand, and a topic you're interested in designing around. 
-
-When I start a new project, I like to think about, "what problem do I want to solve?" When I went through this course, the problem I wanted to solve was keeping track of personal training clients, so I built an MVC CRUD application to keep track of everyones progress. As the mentor of this course and author of these tutorials, I'm anticipating the problem of keeping track of everyones progress, so I'm going to build an MVC CRUD application for tracking everyones milestones. 
-
----
-
-2. **Create a GitHub Repository**
-
-If this is your first foray into VCS I've written a pervious article on [Getting started with Git](https://davewritescode.com/blog/getting-started-with-git/). The previous article is only recommended if you have not yet registered a GitHub or have forgotten how to create a repository. In this step you should create a new repository, clone the new repo, add a README.md file, input your project plan, and push to master.
-
-If you're looking for a more advanced way to do this, I prefer to use the GitHub API. Curl is required for this. You can install Curl with Chocolatey packagemanager using <code>chco install curl</code>
-
-<details>
-
-<summary>Expand this if you want to know how to create a GitHub repo with code</summary>
-
-Substitute anything inside of the square brackets with your values. You will be asked for your password.
-
-```curl
-curl -u [Your GitHub Username] https://api.github.com/user/repos -d "{\"name\":\"[Name of your desired repository]\", \"description\": \"[Description of your desired repository] \"}"
+```
+git checkout -b Week2
 ```
 
-This will allow you to then perform the command <code>git clone https://github.com/[Your GitHub Username]/[Your newly created Repository name]</code>
+2. **Scaffold a new Solution**
 
-</details>
+```
+dotnet new sln
+```
 
----
+3. **Scaffold a new MVC Project**
 
-3. **Write your README.md**
+```
+dotnet new mvc -o web
+```
 
-After navigating to your repository folder you can use the commands <code>echo >> README.MD</code> and <code>code .</code> to create a README.md file and open Visual Studio Code. If you haven't yet configured your development environment take a read over my article on [New Developer Machine Configurations](https://davewritescode.com/blog/new-developer-machine-setup-guide/).
+4. **Add your Project to the Solution**
 
-If you are following this tutorial to the 'T', your README.md should look a lot like [mine](https://github.com/dvdmrk/ExampleProjectCatalog/blob/master/README.md), but you should consult your mentor to determine if your idea fits the criteria and if these articles can help you achieve your milestones. 
+```
+dotnet sln add ./web/web.csproj
+```
 
----
+5. **Add a .ignore file**
 
-4. **Push to GitHub**
+```
+dotnet new ignore
+```
 
-I will be explicitly outlining my branching strategy and organization throuhout this course, but if that annoys you feel free to ignore it and implement your own. 
+6. **Open Visual Studio Code**
 
-Now that you've got your: Idea Invented, Repo Created, README Written, you need to push. Use the following three commands to add your changes, create a commit, and push to master.
+```
+code .
+```
+
+7. **Build your Application**
+
+If you're working with Visual Studio Community aka Visual Studio Full at this point you can just load the solution and click build.
+
+If you are working with Visual Studio Code you have to tell your IDE how to build your application, so you'll want to select `Start Debugging` from the `Debug` menu or just hit `f5`.
+
+![alt text](./resources/start-debugging.png "Start Debugging menu")
+
+Replace the generated launch.json settings with the following settings
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/web/bin/Debug/netcoreapp3.1/web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/web",
+            "stopAtEntry": false,
+            "launchBrowser": {
+                "enabled": true
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/web/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId":"${command:pickProcess}"
+        }
+    ]
+}
+```
+The above settings are a slight modification of the generated settings targeting the folder `web`. 
+
+Save your launch.json settings, navigate to the debug menu and click play.
+
+![alt text](./resources/start-debugging.gif "Start Debugging menu")
+
+8. **Push to GitHub**
 
 ```
 git add .
 git commit -m "Initial Commit/ Added README"
-git push -u origin master
+git push -u origin Week2
+```
+
+---
+
+You just created your first MVC application and pushed it to GitHub. A lot of these commands are boilerplate and that's how I start most of my professional solutions. For a full list of the commands you used and their definitions- refer to my [CLI Cheat Sheet](https://davewritescode.com/blog/cli-cheat-sheet/)
