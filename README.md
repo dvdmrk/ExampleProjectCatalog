@@ -51,6 +51,7 @@ If this is your first foray into VCS I've written a pervious article on [Getting
 If you're looking for a more advanced way to do this, I prefer to use the GitHub API. Curl is required for this. You can install Curl with Chocolatey packagemanager using <code>chco install curl</code>
 
 <details>
+
 <summary>Expand this if you want to know how to create a GitHub repo with code</summary>
 
 Substitute anything inside of the square brackets with your values. You will be asked for your password.
