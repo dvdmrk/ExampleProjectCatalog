@@ -52,7 +52,7 @@ If you're working with Visual Studio Community aka Visual Studio Full at this po
 
 If you are working with Visual Studio Code you have to tell your IDE how to build your application, so you'll want to select `Start Debugging` from the `Debug` menu or just hit `f5`.
 
-![alt text](./resources/start-debugging.png "Start Debugging menu")
+![alt text](./resources/start-debugging.jpg "Start Debugging menu")
 
 Replace the generated launch.json settings with the following settings
 
