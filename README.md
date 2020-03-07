@@ -4,6 +4,7 @@
 Think of an idea and create a project plan.
 
 ## Expectation:
+
 At the end of this class you will have a GitHub repo for your project. You should come to class with an idea and spend class coding your plan as part of the README.md file. Consult the [GitHub Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for questions regarding how to use Markdown. 
 
 Your Project Plan should consist of the following fields:
@@ -23,7 +24,7 @@ Consult the following examples for previous successful project plans:
 
 ## Getting Started
 
-1. Come up with an idea
+1. **Come up with an idea**
 
 Before you can come up with an idea it helps to have an idea of what we'll be building. The requirements want us to build an MVC CRUD application. MVC is a design pattern that will be covered in [Week 2](). CRUD stands for: Create, Read, Update, and Delete. **Basically-** we're going to build a website that controls a multidimensional excel sheet. To put that in different words: we are building the user interface to access and augument data.
 
@@ -43,7 +44,7 @@ When I start a new project, I like to think about, "what problem do I want to so
 
 ---
 
-2. Create a GitHub Repository
+2. **Create a GitHub Repository**
 
 If this is your first foray into VCS I've written a pervious article on [Getting started with Git](https://davewritescode.com/blog/getting-started-with-git/). The previous article is only recommended if you have not yet registered a GitHub or have forgotten how to create a repository. In this step you should create a new repository, clone the new repo, add a README.md file, input your project plan, and push to master.
 
@@ -64,7 +65,7 @@ This will allow you to then perform the command <code>git clone https://github.c
 
 ---
 
-3. Write your README.md
+3. **Write your README.md**
 
 After navigating to your repository folder you can use the commands <code>echo >> README.MD</code> and <code>code .</code> to create a README.md file and open Visual Studio Code. If you haven't yet configured your development environment take a read over my article on [New Developer Machine Configurations](https://davewritescode.com/blog/new-developer-machine-setup-guide/).
 
@@ -72,7 +73,7 @@ If you are following this tutorial to the 'T', your README.md should look a lot 
 
 ---
 
-4. Push to GitHub
+4. **Push to GitHub**
 
 I will be explicitly outlining my branching strategy and organization throuhout this course, but if that annoys you feel free to ignore it and implement your own. 
 
