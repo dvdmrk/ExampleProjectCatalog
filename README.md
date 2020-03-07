@@ -26,7 +26,7 @@ Consult the following examples for previous successful project plans:
 
 1. **Come up with an idea**
 
-Before you can come up with an idea it helps to have an idea of what we'll be building. The requirements want us to build an MVC CRUD application. MVC is a design pattern that will be covered in [Week 2](). CRUD stands for: Create, Read, Update, and Delete. **Basically-** we're going to build a website that controls a multidimensional excel sheet. To put that in different words: we are building the user interface to access and augument data.
+Before you can come up with an idea it helps to have an idea of what we'll be building. The requirements want us to build an MVC CRUD application. MVC is a design pattern that will be covered in [Week 2](https://davewritescode.com/blog/scaffold-a-new-net-core-mvc-application/). CRUD stands for: Create, Read, Update, and Delete. **Basically-** we're going to build a website that controls a multidimensional excel sheet. To put that in different words: we are building the user interface to access and augument data.
 
 **Simply Put:** You're going to build a front-end, backend, and database.
 
