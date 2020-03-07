@@ -78,8 +78,8 @@ I will be explicitly outlining my branching strategy and organization throuhout 
 
 Now that you've got your: Idea Invented, Repo Created, README Written, you need to push. Use the following three commands to add your changes, create a commit, and push to master.
 
-- <code>git add .<code>
+<code>git add .<code>
 
-- <code>git commit -m "Initial Commit/ Added README<code>
+<code>git commit -m "Initial Commit/ Added README<code>
 
-- <code>git push -u origin master<code>
+<code>git push -u origin master<code>
