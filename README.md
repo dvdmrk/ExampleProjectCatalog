@@ -10,6 +10,8 @@ Populate the models folder of your MVC application with any classes required to 
 
 ---
 
+<a name="examples"></a>
+
 ## Exercise - Modeling Data
 
 We will be using the classes created in this tutorial to scaffold our database from a code first approach. That means we're going to write code that defines our database schema. To put it simply:
@@ -192,7 +194,7 @@ Review the examples above fro clarification and discuss with mentor/ mentors to 
 
 4. Configure any required relationships.
 
-Review the examples above for clarification and discuss with mentor/ mentors to determine relationships.
+Review [the examples above](#examples) for clarification and discuss with mentor/ mentors to determine relationships.
 
 5. Push your project to GitHub:
 
