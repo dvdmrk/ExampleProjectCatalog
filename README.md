@@ -210,6 +210,6 @@ git push -u origin Week3
 
 In the [Example Project Models Folder](../../tree/Week3/web/Models):
 
-- a One-to-One relationship is implemented between: [Example Project]() and [Outcome]()
-- a One-to-Many relationship is implemented between: [Student]() and [Example Projects]()
-- a Many-to-Many relationship is implemented between: [Example Projects]() and [Technologies]() using the [ExampleProjectTechnology]() Class.
+- a One-to-One relationship is implemented between: [Example Project](../../tree/Week3/web/Models/ExampleProject.cs#L23) and [Outcome](../../tree/Week3/web/Models/Outcome.cs#L11)
+- a One-to-Many relationship is implemented between: [Student](../../tree/Week3/web/Models/Student.cs#L11) and [Example Projects](../../tree/Week3/web/Models/ExampleProject.cs#L14)
+- a Many-to-Many relationship is implemented between: [Example Projects](../../tree/Week3/web/Models/ExampleProject.cs#L18) and [Technologies](../../tree/Week3/web/Models/Technology.cs#L15) using the [ExampleProjectTechnology](../../tree/Week3/web/Models/ExampleProjectTechnology.cs) Class.
