@@ -203,3 +203,13 @@ git add .
 git commit -m "Added models"
 git push -u origin Week3
 ```
+
+---
+
+## Example Project Reference
+
+In this example project:
+
+- a One-to-One relationship is implemented between: Example Project and Outcome
+- a One-to-Many relationship is implemented between: Student and Example Projects
+- a Many-to-Many relationship is implemented between: Example Projects and Technologies
