@@ -208,7 +208,7 @@ git push -u origin Week3
 
 ## Example Project Reference
 
-In the [Example Project Models Folder](../web/Models):
+In the [Example Project Models Folder](../../tree/Week3/web/Models):
 
 - a One-to-One relationship is implemented between: [Example Project]() and [Outcome]()
 - a One-to-Many relationship is implemented between: [Student]() and [Example Projects]()
