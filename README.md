@@ -10,8 +10,6 @@ Populate the models folder of your MVC application with any classes required to 
 
 ---
 
-<a name="examples"></a>
-
 ## Exercise - Modeling Data
 
 We will be using the classes created in this tutorial to scaffold our database from a code first approach. That means we're going to write code that defines our database schema. To put it simply:
@@ -95,7 +93,9 @@ namespace web.Models
 
 > #### When modeling relationships to generate a database with Entity Framework Core, you have to be more specific about the relationship and how the database should be created. [Entity Framework Relationships Documentation](https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key)
 
-## Exercise - Modeling Relationships
+<a name="examples"></a>
+
+## Example - Modeling Relationships
 
 After reviewing the above documentation, there are a few additional rules to follow for modeling our Classes to scaffold our database.
 
