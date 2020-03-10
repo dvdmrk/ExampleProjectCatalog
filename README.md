@@ -120,7 +120,6 @@ namespace web.Models
 {
     public class Base
     {
-        [Key]
         public Guid Id { get; set; }
     }
     public class Owner : Base
@@ -151,7 +150,6 @@ namespace web.Models
 {
     public class Base
     {
-        [Key]
         public Guid Id { get; set; }
     }
     public class Car : Base

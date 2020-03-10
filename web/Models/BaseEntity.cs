@@ -8,7 +8,6 @@ namespace web.Models
     /// </summary>
     public class BaseEntity
     {
-        [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
     }
