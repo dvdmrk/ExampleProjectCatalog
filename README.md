@@ -186,13 +186,280 @@ namespace web.Models
 
 ![alt text](./resources/new-class.jpg "Create a new class")
 
+I've created the following new classes to represt Exapmle Project Data:
+
+- ExampleProject.cs
+- ExampleProjectTechnology.cs
+- Milestone.cs
+- Outcome.cs
+- Student.cs
+- Technology.cs
+
+**What are the objects your application will create, read, update, and delete?**
+
+> If you start with 1 well defined class, you can always go back and add more.
+
 3. Create the fields on this new class/ classes which will represent the columns in the table/ tables.
 
-Review the examples above fro clarification and discuss with mentor/ mentors to determine fields.
+<code>ExampleProject.cs</code>
+
+This will be my ExampleProjects table, it will store an example project for each student. For this class I know that I'll need the RepositoryName if I want to be able to grade it.
+
+```csharp
+using System;
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class ExampleProject : BaseEntity
+    {
+        public string RepositoryName { get; set; }
+    }
+}
+```
+
+As you can see I'm using inheritance with <code>BaseEntity</code>. I'm using this because I realized that all of my entities would have an identifier and a name. The inheritance allows any derrived objects to maintain those properties.
+
+<code>BaseEntity.cs</code>
+
+```csharp
+using System;
+namespace web.Models
+{
+    /// <summary>
+    /// All named database entities will inherit from this class.
+    /// </summary>
+    public class BaseEntity
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+    }
+}
+```
+
+> Above I am using the summary xml tag so that when someone hovers over the class name, they'll get a summary of it's purpose.
+
+<code>ExampleProjectTechnology.cs</code>
+
+This will serve as a bridge table for the Many-to-Many relationship between ExampleProjects and Technologies. We will return to this in the next step.
+
+<code>MileStone.cs</code>
+
+For this class I want to know what the goal was, and the name of the result branch. As a developer, I can calculate your github url + your repository name + your branch name to generate a link to your latest commits on that branch. As a mentor, that link will help me see if you are achieving your goals. There will be a One-to-Many relationhship we'll configure in step 4.
+
+```csharp
+using System;
+namespace web.Models
+{
+    public class Milestone : BaseEntity
+    {
+        public string Goal {get;set;}
+        public string BranchName {get;set;}
+    }
+}
+```
+
+<code>Outcome.cs</code>
+
+This class will be a table in the database that stores the grade of your example project. In step 4 we will establish a One-to-One relationship with ExampleProject.
+
+```csharp
+using System;
+namespace web.Models
+{
+    public class Outcome : BaseEntity
+    {
+        public int Grade { get; set; }
+    }
+}
+```
+
+<code>Student.cs</code>
+
+As I mentioned earlier, a link to your github can be useful for me as a mentor. Students will also have a One-to-Many relationship with ExampleProjects configured in step 4.
+
+```csharp
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class Student : BaseEntity
+    {
+        public string GitHubUrl { get; set; }
+    }
+}
+```
+
+<code>Technology.cs</code>
+
+On the technology class I want a description of what it will be. For example: C#, React, Vue, Swift, Python, etc... This will be valuable for displaying as a list to other students looking for example projects.
+
+```csharp
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class Technology : BaseEntity
+    {
+        public string Description {get;set;}
+        public TechnologyType TechnologyType {get;set;}
+    }
+}
+```
+
+<code>TechnologyType.cs</code>
+
+This is an enum which allows us to represent numeric data with string values. An enum is defined in a comma separated list, where the first value is 0 unless specified otherwise, and increases by 1 with all additional values. This will create an integer column in our database.
+
+```csharp
+namespace web.Models
+{
+    public enum TechnologyType
+    {
+        Frontend,
+        Backend,
+        Database
+    }
+}
+```
 
 4. Configure any required relationships.
 
-Review [the examples above](#examples) for clarification and discuss with mentor/ mentors to determine relationships.
+
+**ExampleProject**
+
+Example project has One-to-One relationship with Outcome. To establish this we need the following code on the ExampleProject and the Outcome class.
+
+## One-to-One
+
+<code>ExampleProject.cs</code>
+
+```csharp
+using System;
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class ExampleProject : BaseEntity
+    {
+        public Guid OutcomeId { get; set; }
+        /// <summary>
+        /// This is a one-to-one relationship with Outcome
+        /// <summary>
+        public Outcome Outcome { get; set; }
+    }
+}
+```
+
+<code>Outcome.cs</code>
+
+```csharp
+using System;
+namespace web.Models
+{
+    public class Outcome : BaseEntity
+    {
+        public Guid ExampleProjectId { get; set; }
+        /// <summary>
+        /// This is a one-to-one relationship with ExampleProject
+        /// <summary>
+        public ExampleProject ExampleProject { get; set; }
+    }
+}
+```
+
+Example project also has a One-to-Many relationship with Students, where 1 student can have many example projects. To establish this relationship we need the following code in ExampleProject and Student classes.
+
+## One-to-Many
+
+<code>ExampleProject.cs</code>
+
+```csharp
+using System;
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class ExampleProject : BaseEntity
+    {
+        public Guid StudentId { get; set; }
+        /// <summary>
+        /// This is a one-to-many relationship with Student
+        /// <summary>
+        public Student Student { get; set; }
+    }
+}
+```
+
+<code>Student.cs</code>
+
+```csharp
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class Student : BaseEntity
+    {
+        /// <summary>
+        /// This is a one-to-many relationship with ExampleProjects
+        /// <summary>
+        public ICollection<ExampleProject> ExampleProject { get; set; }
+    }
+}
+```
+
+ExampleProject also has a Many-to-Many relationship with Technology, this is expressed through the class ExampleProjectTechnology. To represent this relationship we also need to add fields to the Technology class and the ExampleProject.
+
+## Many-to-Many
+
+<code>ExampleProject.cs</code>
+
+```csharp
+using System;
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class ExampleProject : BaseEntity
+    {
+        /// <summary>
+        /// This is a many-to-many relationship between Example Projects and Technologies        
+        /// <summary>
+        public ICollection<ExampleProjectTechnology> ExampleProjectTechnologies { get; set; }
+    }
+}
+```
+
+<code>Technology.cs</code>
+
+```csharp
+using System.Collections.Generic;
+namespace web.Models
+{
+    public class Technology : BaseEntity
+    {
+        /// <summary>
+        /// This is a many-to-many relationship between ExampleProjects and Technologies
+        /// <summary>
+        public ICollection<ExampleProjectTechnology> ExampleProjectTechnologies {get;set;}
+    }
+}
+```
+
+<code>ExampleProjectTechnology.cs</code>
+
+```csharp
+using System;
+
+namespace web.Models
+{
+    /// <summary>
+    /// This is a many-to-many relationship between Example Projects and Technologies
+    /// <summary>
+    public class ExampleProjectTechnology
+    {
+        public Guid ExampleProjectId { get; set; }
+        public Guid TechnologyId { get; set; }
+        public ExampleProject ExampleProject { get; set; }
+        public Technology Technology { get; set; }
+    }
+}
+```
+
+> Your classes may look different, but the way you define relationships should look simillar. 
 
 5. Push your project to GitHub:
 

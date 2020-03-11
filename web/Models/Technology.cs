@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 namespace web.Models
 {
     public class Technology : BaseEntity
@@ -11,7 +8,6 @@ namespace web.Models
         /// <summary>
         /// This is a many-to-many relationship between ExampleProjects and Technologies
         /// <summary>
-        public ExampleProjectTechnology ExampleProjectTechnologies {get;set;}
-        public ICollection<ExampleProject> ExampleProjects {get;set;}
+        public ICollection<ExampleProjectTechnology> ExampleProjectTechnologies {get;set;}
     }
 }

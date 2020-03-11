@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace web.Models
 {
     public class Student : BaseEntity

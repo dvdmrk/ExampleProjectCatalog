@@ -7,9 +7,9 @@ namespace web.Models
     /// <summary>
     public class ExampleProjectTechnology
     {
-        public Guid ExampleProjectId {get;set;}
-        public ExampleProject ExampleProject {get;set;}
-        public Technology Technology{get;set;}
-        public Guid TechnologyId {get;set;}
+        public Guid ExampleProjectId { get; set; }
+        public Guid TechnologyId { get; set; }
+        public ExampleProject ExampleProject { get; set; }
+        public Technology Technology { get; set; }
     }
 }
