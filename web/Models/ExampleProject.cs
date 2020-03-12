@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace web.Models
 {
-    public class ExampleProject : BaseEntity
+    public class ExampleProject : BaseNamedEntity
     {
         public Guid StudentId { get; set; }
         public Guid OutcomeId { get; set; }
