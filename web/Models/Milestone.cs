@@ -1,7 +1,7 @@
 using System;
 namespace web.Models
 {
-    public class Milestone : BaseEntity
+    public class Milestone : BaseNamedEntity
     {
         public string Goal {get;set;}
         public Guid ExampleProjectId {get;set;}
