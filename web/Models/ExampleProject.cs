@@ -4,7 +4,6 @@ namespace web.Models
 {
     public class ExampleProject : BaseEntity
     {
-        public string RepositoryName { get; set; }
         public Guid StudentId { get; set; }
         public Guid OutcomeId { get; set; }
         /// <summary>

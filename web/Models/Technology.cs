@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 namespace web.Models
 {
-    public class Technology : BaseEntity
+    public class Technology : BaseNamedEntity
     {
         public string Description {get;set;}
         public TechnologyType TechnologyType {get;set;}
