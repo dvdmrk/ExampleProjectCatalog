@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace web.Models
 {
     public class ExampleProject : BaseEntity
     {
-        public string RepositoryName { get; set; }
         public Guid StudentId { get; set; }
         public Guid OutcomeId { get; set; }
         /// <summary>
@@ -14,6 +15,7 @@ namespace web.Models
         /// <summary>
         /// This is a one-to-one relationship with Outcome
         /// <summary>
+        [ForeignKey("OutcomeId")]
         public Outcome Outcome { get; set; }
         /// <summary>
         /// This is a one-to-many relationship with Milestones

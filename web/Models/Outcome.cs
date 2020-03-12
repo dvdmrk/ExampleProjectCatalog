@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace web.Models
 {
@@ -9,6 +10,7 @@ namespace web.Models
         /// <summary>
         /// This is a one-to-one relationship with ExampleProject
         /// <summary>
+        [ForeignKey("ExampleProjectId")]
         public ExampleProject ExampleProject { get; set; }
     }
 }
