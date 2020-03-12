@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 namespace web.Models
 {
-    public class Student : BaseEntity
+    public class Student : BaseNamedEntity
     {
         public string GitHubUrl { get; set; }
         /// <summary>
