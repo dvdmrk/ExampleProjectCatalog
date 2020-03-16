@@ -140,15 +140,90 @@ services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.Get
 
 Adding the Context class to your services pipeline allows you to reference the the DbSet properties defined therein. Later, this will allow you to pull data from the database for storage or passing to the view.
 
+7. Map Foreign Keys
+
+Entity framework can map foreign key relationships by convention in some cases. One-to-Many relationships being the most common. For One-to-One relationships you need to explicitly set a Parent/ Child relationship by specifying the ForeignKey Data Annotation. 
+
+The parent configures the ForeignKey data annotation. An example of this from this repo is Outcome and ExampleProject. 
+
+<code>Outcome.cs</code>
+
+```csharp
+namespace web.Models
+{
+    public class Outcome : BaseEntity
+    {
+        public int Grade { get; set; }
+        /// <summary>
+        /// This is a one-to-one relationship with ExampleProject
+        /// <summary>
+        public ExampleProject ExampleProject { get; set; }
+    }
+}
+```
+
+Outcome has the ExampleProject class as a property.
+
+<code>ExampleProject.cs</code>
+
+```csharp
+public class ExampleProject : BaseNamedEntity
+{
+   [ForeignKey("OutcomeId")]
+   public Outcome Outcome { get; set; }
+   /// <summary>
+   /// This is a one-to-many relationship with Milestones
+   /// <summary>
+}
+```
+
+ExampleProject has the Outcome class as a property, and a reference to it's Id property configured as a foreign key.
+
+For Many-to-Many relationships a little bit more work is required. The class representing the bridge table should have the foreign key data annotation for both classes, and both classes should have a ICollection of the bridge table class as a property. 
+
+<code>ExampleProjectTechnology.cs</code>
+
+```csharp
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace web.Models
+{
+    /// <summary>
+    /// This is a many-to-many relationship between Example Projects and Technologies
+    /// <summary>
+    public class ExampleProjectTechnology
+    {
+        public Guid ExampleProjectId { get; set; }
+        public Guid TechnologyId { get; set; }
+        [ForeignKey("ExampleProjectId")]
+        public ExampleProject ExampleProject { get; set; }
+        [ForeignKey("TechnologyId")]
+        public Technology Technology { get; set; }
+    }
+}
+```
+
+Now, we are required to configure the ExampleProjectTechnology in the OnModelCreating method of the Context class.
+
+```csharp
+//Configure Technology and ExampleProject Foreign Keys for the ExampleProjectTechnology Table 
+protected override void OnModelCreating(ModelBuilder modelBuilder) {
+   modelBuilder.Entity<ExampleProjectTechnology>().HasKey(t => new { t.TechnologyId, t.ExampleProjectId });
+}
+```
+
+The above code specifies that in stead of a Primary Key, this table will have 2 foreign keys. One to ExampleProject, the other to Technology.
+
 ### Scaffolding a Code First Database
 
-7. Create an Initial Database Migration
+8. Create an Initial Database Migration
 
 Run the following command from the web folder: <code>dotnet ef migrations add InitialMigration</code>. This will create files for generating your Database. The more databases you create, the more familliar you will be with ensuring it's creating the right tables and relationships. 
 
 > Entity Framework is trying to understand what SQL to write to generate your database. Errors aren't uncommon, they are an indication that your relationships aren't configured appropriately. If you get an error, that's not uncommon. Read the error, if it makes sense fix it. If it doesn't make sense, google it. If it still doesn't make sense
 
-8. Apply your Migration to your Database
+9. Apply your Migration to your Database
 
 From within the web folder, run the following command to apply your generated migration to your database: <code>dotnet ef database update</code>.
 
