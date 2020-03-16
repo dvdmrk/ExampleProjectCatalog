@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace web.Models
 {
     public class Technology : BaseNamedEntity
