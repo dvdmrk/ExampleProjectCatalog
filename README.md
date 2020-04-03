@@ -114,6 +114,8 @@ namespace web.Data
         DbSet<Milestone> Milestones { get; set; }
         //Register ExampleProjects table
         DbSet<ExampleProject> ExampleProjects { get; set; }
+        //Register Outcomes table
+        DbSet<Outcome> Outcomes { get; set; }
     }
 }
 ```
