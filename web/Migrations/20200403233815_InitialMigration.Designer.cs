@@ -10,7 +10,7 @@ using web.Data;
 namespace web.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200316132312_InitialMigration")]
+    [Migration("20200403233815_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,7 +94,7 @@ namespace web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Outcome");
+                    b.ToTable("Outcomes");
                 });
 
             modelBuilder.Entity("web.Models.Student", b =>

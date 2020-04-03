@@ -16,5 +16,6 @@ namespace web.Data
         DbSet<Technology> Technologies { get; set; }
         DbSet<Milestone> Milestones { get; set; }
         DbSet<ExampleProject> ExampleProjects { get; set; }
+        DbSet<Outcome> Outcomes { get; set; }
     }
 }

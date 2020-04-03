@@ -92,7 +92,7 @@ namespace web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Outcome");
+                    b.ToTable("Outcomes");
                 });
 
             modelBuilder.Entity("web.Models.Student", b =>

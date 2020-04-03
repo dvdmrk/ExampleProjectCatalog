@@ -8,7 +8,7 @@ namespace web.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Outcome",
+                name: "Outcomes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -16,7 +16,7 @@ namespace web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Outcome", x => x.Id);
+                    table.PrimaryKey("PK_Outcomes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,9 +59,9 @@ namespace web.Migrations
                 {
                     table.PrimaryKey("PK_ExampleProjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExampleProjects_Outcome_OutcomeId",
+                        name: "FK_ExampleProjects_Outcomes_OutcomeId",
                         column: x => x.OutcomeId,
-                        principalTable: "Outcome",
+                        principalTable: "Outcomes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -153,7 +153,7 @@ namespace web.Migrations
                 name: "ExampleProjects");
 
             migrationBuilder.DropTable(
-                name: "Outcome");
+                name: "Outcomes");
 
             migrationBuilder.DropTable(
                 name: "Students");
