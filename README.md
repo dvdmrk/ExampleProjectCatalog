@@ -10,6 +10,95 @@ By the end of this week's exercise you will have functional MVC Web App that can
 
 ---
 
+## Exercise - Saving to a database
+
+The code you'll write and generate in this weeks course is all in the vien of getting information into your database. The following is an example of how you would get car data into a database. The code you'll generate will write most of this for you, but often throughout your career you won't be so lucky and you'll have to understand how:
+
+- To create a new instance of an object
+- Add that instance to the context
+- and Save the context
+
+Here is an example of saving an instance of a Car class to a database.
+
+### Example
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using web.Data;
+
+namespace web
+{
+    public class Context : DbContext
+    {
+        public Context(DbContextOptions<Context> options) : base(options) {}
+        public DbSet<Car> Cars { get; set; }
+    }
+    public class Car 
+    {
+        public Guid Id { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+    }
+    public class SeedFactory
+    {
+        public static void Initialize(Context context)
+        {
+            context.Database.EnsureCreated();
+            if (!context.Set<Car>().Any())
+            {
+                var cars = new List<Car>()
+                {
+                    new Car
+                    {
+                        Make = "Hyundai",
+                        Model = "Elantra",
+                        Year = 2018
+                    }
+                }
+                context.AddRangeAsync(cars);
+                context.SaveChangesAsync();
+            }
+        }
+    }
+}
+```
+
+### Activity
+
+<details><summary>How would you add 2 cars to the database?</summary>
+
+
+```csharp
+if (!context.Set<Car>().Any())
+{
+    var cars = new List<Car>()
+    {
+        new Car
+        {
+            Make = "Hyundai",
+            Model = "Elantra",
+            Year = 2018
+        },
+        new Car
+        {
+            Make = "Hyundai",
+            Model = "Accent",
+            Year = 2016
+        }
+    }
+    context.AddRangeAsync(cars);
+    context.SaveChangesAsync();
+}
+```
+
+</details>
+
+---
+
 ## Getting Started
 
 > Start by creating a new branch with the following command: <code>git checkout -b Week5</code>
@@ -43,8 +132,6 @@ At a high level this is what the following code does:
 - If there is no data create some data
 - When all of the data is created add it to the database
 - When all the data is added save the database
-
-### Example
 
 ```csharp
 using System;
@@ -145,84 +232,6 @@ namespace web
     }
 }
 ```
-
-### Example
-
-Your version might be more simple such as adding a single car to a cars database.
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using web.Data;
-
-namespace web
-{
-    public class Context : DbContext
-    {
-        public Context(DbContextOptions<Context> options) : base(options) {}
-        public DbSet<Car> Cars { get; set; }
-    }
-    public class Car 
-    {
-        public Guid Id { get; set; }
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-    }
-    public class SeedFactory
-    {
-        public static void Initialize(Context context)
-        {
-            context.Database.EnsureCreated();
-            if (!context.Set<Car>().Any())
-            {
-                var cars = new List<Car>()
-                {
-                    new Car
-                    {
-                        Make = "Hyundai",
-                        Model = "Elantra",
-                        Year = 2018
-                    }
-                }
-                context.AddRangeAsync(cars);
-                context.SaveChangesAsync();
-            }
-        }
-    }
-}
-```
-### Exercise
-
-<details><summary>How would you add 2 cars to the database?</summary>
-
-
-```csharp
-if (!context.Set<Car>().Any())
-{
-    var cars = new List<Car>()
-    {
-        new Car
-        {
-            Make = "Hyundai",
-            Model = "Elantra",
-            Year = 2018
-        },
-        new Car
-        {
-            Make = "Hyundai",
-            Model = "Accent",
-            Year = 2016
-        }
-    }
-    context.AddRangeAsync(cars);
-    context.SaveChangesAsync();
-}
-```
-
-</details>
 
 4. Add your SeedFactory.cs Initialize method to your Startup.cs Configure method.
 
