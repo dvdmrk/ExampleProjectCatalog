@@ -12,10 +12,10 @@ namespace web.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<ExampleProjectTechnology>().HasKey(t => new { t.TechnologyId, t.ExampleProjectId });
         }
-        DbSet<Student> Students { get; set; }
-        DbSet<Technology> Technologies { get; set; }
-        DbSet<Milestone> Milestones { get; set; }
-        DbSet<ExampleProject> ExampleProjects { get; set; }
-        DbSet<Outcome> Outcomes { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
+        public DbSet<Milestone> Milestones { get; set; }
+        public DbSet<ExampleProject> ExampleProjects { get; set; }
+        public DbSet<Outcome> Outcomes { get; set; }
     }
 }
