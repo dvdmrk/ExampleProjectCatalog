@@ -249,9 +249,89 @@ We added the Context class to our dependency pipeline in Week 4. That makes it a
 
 5. Scaffold CRUD Controller and Views
 
+In this step we will be using the `aspnet-codegenerator` to create many of our views and controllers. 
+
+> We've already explored 1 way to get data into the database (by seeding it), the second way is by exposing it for manual insertion. This is not required for all of your classes. 
+
+I've seeded my Technologies table, I will be adding CRUD Controllers/ Views for Students and ExampleProjects because I expect these to be updated most often. 
+
+The following command will generate the StudentController and a Student folder in Views folder that contains Create, Delete, Details, Edit, and Index views.
+
 <code>dotnet aspnet-codegenerator controller --model Student --dataContext Context --controllerName StudentController --relativeFolderPath Controllers --useDefaultLayout</code>
 
-<code>dotnet aspnet-codegenerator controller --model ExampleProject --dataContext Context --controllerName ExampleProjectController --relativeFolderPath Controllers --useDefaultLayout</code>
+Now I'm going to do the same thing with the ExampleProject class, but first let's breakdown the paramaters on the `aspnet-codegenerator`.
+
+1. `controller` - We are telling the cli tool we want to scaffold a Controller.
+2. `--model` - We are telling the cli tool to use the following model/ class.
+3. `--dataContext` - We are telling the cli tool to use the following context (a class inheriting from DbContext).
+4. `--controllerName` - We are naming the scaffolding result (model name + 'Controller' is a convention that helps the default routing locate your cooresponding views).
+5. `--relativeFolderPath` - We are telling the cli tool where we want the new controller to be generated, the 'Controllers' folder.
+6. `--useDefaultLayout` - We are telling the cli tool to generate views for this controller using the default layout page: `_Layout.cshtml`.
+
+<code>dotnet aspnet-codegenerator controller -m ExampleProject -dc Context -name ExampleProjectController -outDir Controllers -udl</code>
+
+Use the following command to open the help menu in your terminal: `dotnet aspnet-codegenerator controller -h` or [view a full list of aspnet-codegenerator commands](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/tools/dotnet-aspnet-codegenerator?view=aspnetcore-3.1) if you want to learn more.
+
+6. Add your new Controllers to your Layout page
+
+Navigate to Views/Shared/_Layout.cshtml and look around. The important part to be congizant of is: render body. The views you just scaffolded will be rendered in that area when their cooresponding controller/ action route is navigated to in the address bar.
+
+In this example we are adding routes to our new controller/ actions within the main navigation. 
+
+![alt text](resources\layout.jpg "Layout before and after.")
+
+#### Before
+
+This is what your navigation looks like before.
+
+```html
+<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>
+    </ul>
+</div>
+```
+
+#### After
+
+```html
+<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Students</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="ExampleProject" asp-action="Index">Example Projects</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>
+    </ul>
+</div>
+```
+
+**What's changed?**
+
+- We added 2 new list items to the navigation
+- Each new list item has a link with `asp-` properties
+   - These are tag helpers we will be using `asp-controller` and `asp-action`.
+      - The value of `asp-controller` should be equal to the name of our model on which the controller is based (the name of the controller you scaffolded minus 'Controller').
+      - We have the following actions in our newly scaffolded controllers: Create, Delete, Details, Edit, Index. I want the value of `asp-action` to be index because this will show a list view of our Students/ ExampleProjects respectively. 
+    - [Read the tag helpers documentation](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/?view=aspnetcore-3.1)
+
+7. Modify any one-to-many display elements to show the object name instead of identifier
+
+
+
+8. Add many-to-many display elements and logic to views/ controllers
 
 ### Wrapping Up
 

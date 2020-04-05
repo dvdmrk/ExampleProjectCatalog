@@ -7,7 +7,7 @@ namespace web.Models
     public class ExampleProject : BaseNamedEntity
     {
         public Guid StudentId { get; set; }
-        public Guid OutcomeId { get; set; }
+        public Guid? OutcomeId { get; set; }
         /// <summary>
         /// This is a one-to-many relationship with Student
         /// <summary>
