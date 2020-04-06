@@ -50,7 +50,9 @@ namespace web.Controllers
         public IActionResult Create()
         {
             ViewData["OutcomeId"] = new SelectList(_context.Outcomes, "Id", "Id");
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id");
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Name");
+            ViewData["Technologies"] = new SelectList(_context.Technologies, "Id", "Name");
+
             return View();
         }
 
@@ -64,12 +66,12 @@ namespace web.Controllers
             if (ModelState.IsValid)
             {
                 exampleProject.Id = Guid.NewGuid();
+                exampleProject.Outcome = new Outcome();
                 _context.Add(exampleProject);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OutcomeId"] = new SelectList(_context.Outcomes, "Id", "Id", exampleProject.OutcomeId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", exampleProject.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Name", exampleProject.StudentId);
             return View(exampleProject);
         }
 

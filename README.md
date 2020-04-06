@@ -329,9 +329,84 @@ This is what your navigation looks like before.
 
 7. Modify any one-to-many display elements to show the object name instead of identifier
 
+On our ExampleProject views, we have configured a One-to-Many relationship with Student and the dropdown display property is there, but it is showing us the Student.Id instead of the Student.Name. To change this we will update the Index, Details, and Delete of the pages in the ExampleProject Views folder, and we will update the Create and Edit GET and POST methhods.
 
+### Update the Create and Edit GET and POST methhods
 
-8. Add many-to-many display elements and logic to views/ controllers
+Starting with `Controllers/ExampleProjectController.cs` `Create()` Create GET method (there should at this point be a comment above each Action which which exposes the Http Verb and route to access it, but by default any Action without an Http Verb data annotation is set to GET):
+
+![alt text](resources\create.jpg "Create before and after.")
+
+#### Before
+
+```csharp
+public IActionResult Create()
+{
+    ViewData["OutcomeId"] = new SelectList(_context.Outcomes, "Id", "Id");
+    ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id");
+    return View();
+}
+```
+
+#### After
+
+```csharp
+public IActionResult Create()
+{
+    ViewData["OutcomeId"] = new SelectList(_context.Outcomes, "Id", "Id");
+    ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Name");
+    return View();
+}
+```
+
+**What's changed?**
+
+The dropdown is loaded from ViewData. To make sense of this: Data gets to the view in 1 of 2 ways- either passed in the `View(model)` method as a model, or through the `ViewData`. It's not uncommon to populate drop down menus or combo boxes with ViewData or AJAX data. 
+
+> Repeate this process for the Create POST and EDIT GET and POST methods.
+
+### Update the Index, Details, and Delete of the pages in the ExampleProject Views folder
+
+Starting with `Views/ExampleProject/Indedx.cshtml` once again we need to load Student.Name instead of Student.Id:
+
+![alt text](resources\index.jpg "Index before and after.")
+
+#### Before
+
+Within the foreach loop of the Index method, we are iterating over each Example Project and displaying it's information in a list. 
+
+```csharp
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Outcome.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+```
+
+#### After
+
+Change the following line of code:
+
+`@Html.DisplayFor(modelItem => item.Student.Id)`
+
+To reference Student.Name instead of Student.Id:
+
+`@Html.DisplayFor(modelItem => item.Student.Name)`
+
+> Repeat this process for the Details and Delete cshtml files.
 
 ### Wrapping Up
 

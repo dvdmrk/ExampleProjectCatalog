@@ -28,7 +28,7 @@ namespace web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OutcomeId")
+                    b.Property<Guid>("OutcomeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("StudentId")
@@ -37,8 +37,7 @@ namespace web.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OutcomeId")
-                        .IsUnique()
-                        .HasFilter("[OutcomeId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("StudentId");
 
@@ -137,7 +136,9 @@ namespace web.Migrations
                 {
                     b.HasOne("web.Models.Outcome", "Outcome")
                         .WithOne("ExampleProject")
-                        .HasForeignKey("web.Models.ExampleProject", "OutcomeId");
+                        .HasForeignKey("web.Models.ExampleProject", "OutcomeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("web.Models.Student", "Student")
                         .WithMany("ExampleProject")

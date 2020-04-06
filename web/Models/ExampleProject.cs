@@ -1,13 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace web.Models
 {
     public class ExampleProject : BaseNamedEntity
     {
+        public ExampleProject(){}
+        public ExampleProject(ExampleProjectViewModel exampleProject)
+        {
+            StudentId = exampleProject.StudentId;
+            Outcome = new Outcome();
+            ExampleProjectTechnologies = exampleProject.TechnologyIds.Select(e =>
+                new ExampleProjectTechnology
+                {
+                    TechnologyId = e,
+                }).ToList();
+        }
+
         public Guid StudentId { get; set; }
-        public Guid? OutcomeId { get; set; }
+        public Guid OutcomeId { get; set; }
         /// <summary>
         /// This is a one-to-many relationship with Student
         /// <summary>

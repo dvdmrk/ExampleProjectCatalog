@@ -53,7 +53,7 @@ namespace web.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     StudentId = table.Column<Guid>(nullable: false),
-                    OutcomeId = table.Column<Guid>(nullable: true)
+                    OutcomeId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,7 +63,7 @@ namespace web.Migrations
                         column: x => x.OutcomeId,
                         principalTable: "Outcomes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ExampleProjects_Students_StudentId",
                         column: x => x.StudentId,
@@ -120,8 +120,7 @@ namespace web.Migrations
                 name: "IX_ExampleProjects_OutcomeId",
                 table: "ExampleProjects",
                 column: "OutcomeId",
-                unique: true,
-                filter: "[OutcomeId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExampleProjects_StudentId",
